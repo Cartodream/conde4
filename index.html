@@ -36,7 +36,8 @@
         <script src="data/parking_3.js"></script>
         <script src="data/routes_4.js"></script>
         <script src="data/eau_5.js"></script>
-        <script src="data/pointsinterets_6.js"></script>
+        <script src="data/Commerces_6.js"></script>
+        <script src="data/pointsinterets_7.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -45,9 +46,9 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[48.69647080080411,1.6064545024528054],[48.76109185130762,1.7573440696221405]]);
+        }).fitBounds([[48.68758183859048,1.601174820899035],[48.75970772909922,1.7695775393537472]]);
         var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot;<a href="https://cartodream.wixsite.com/website-1" target="_blank">Cartodream</a> &middot;<a href="https://www.openstreetmap.fr/" target="_blank">OSM</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
@@ -132,10 +133,12 @@
                         <td colspan="2">' + (feature.properties['code'] !== null ? autolinker.link(feature.properties['code'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['fclass'] !== null ? autolinker.link(feature.properties['fclass'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">fclass</th>\
+                        <td>' + (feature.properties['fclass'] !== null ? autolinker.link(feature.properties['fclass'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">name</th>\
+                        <td>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -405,7 +408,7 @@
         });
         bounds_group.addLayer(layer_eau_5);
         map.addLayer(layer_eau_5);
-        function pop_pointsinterets_6(feature, layer) {
+        function pop_Commerces_6(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -426,9 +429,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_pointsinterets_6_0() {
+        function style_Commerces_6_0() {
             return {
-                pane: 'pane_pointsinterets_6',
+                pane: 'pane_Commerces_6',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -437,26 +440,76 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(213,180,60,1.0)',
+                fillColor: 'rgba(141,90,153,1.0)',
                 interactive: true,
             }
         }
-        map.createPane('pane_pointsinterets_6');
-        map.getPane('pane_pointsinterets_6').style.zIndex = 406;
-        map.getPane('pane_pointsinterets_6').style['mix-blend-mode'] = 'normal';
-        var layer_pointsinterets_6 = new L.geoJson(json_pointsinterets_6, {
+        map.createPane('pane_Commerces_6');
+        map.getPane('pane_Commerces_6').style.zIndex = 406;
+        map.getPane('pane_Commerces_6').style['mix-blend-mode'] = 'normal';
+        var layer_Commerces_6 = new L.geoJson(json_Commerces_6, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_pointsinterets_6',
-            layerName: 'layer_pointsinterets_6',
-            pane: 'pane_pointsinterets_6',
-            onEachFeature: pop_pointsinterets_6,
-            style: style_pointsinterets_6_0,
+            dataVar: 'json_Commerces_6',
+            layerName: 'layer_Commerces_6',
+            pane: 'pane_Commerces_6',
+            onEachFeature: pop_Commerces_6,
+            style: style_Commerces_6_0,
         });
-        bounds_group.addLayer(layer_pointsinterets_6);
-        map.addLayer(layer_pointsinterets_6);
+        bounds_group.addLayer(layer_Commerces_6);
+        map.addLayer(layer_Commerces_6);
+        function pop_pointsinterets_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_pointsinterets_7_0() {
+            return {
+                pane: 'pane_pointsinterets_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,166,178,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_pointsinterets_7');
+        map.getPane('pane_pointsinterets_7').style.zIndex = 407;
+        map.getPane('pane_pointsinterets_7').style['mix-blend-mode'] = 'normal';
+        var layer_pointsinterets_7 = new L.geoJson(json_pointsinterets_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_pointsinterets_7',
+            layerName: 'layer_pointsinterets_7',
+            pane: 'pane_pointsinterets_7',
+            onEachFeature: pop_pointsinterets_7,
+            style: style_pointsinterets_7_0,
+        });
+        bounds_group.addLayer(layer_pointsinterets_7);
+        map.addLayer(layer_pointsinterets_7);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/pointsinterets_6.png" /> points interets': layer_pointsinterets_6,'<img src="legend/eau_5.png" /> eau': layer_eau_5,'<img src="legend/routes_4.png" /> routes': layer_routes_4,'<img src="legend/parking_3.png" /> parking': layer_parking_3,'<img src="legend/btiments_2.png" /> bâtiments': layer_btiments_2,'<img src="legend/arrtbus_1.png" /> arrêt bus': layer_arrtbus_1,'<img src="legend/conde_0.png" /> conde': layer_conde_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/pointsinterets_7.png" /> points interets': layer_pointsinterets_7,'<img src="legend/Commerces_6.png" /> Commerces': layer_Commerces_6,'<img src="legend/arrtbus_1.png" /> arrêt bus': layer_arrtbus_1,},{collapsed:false}).addTo(map);
         setBounds();
         resetLabels([layer_routes_4]);
         map.on("zoomend", function(){
